@@ -1,0 +1,17 @@
+VENV_DIR = "venv"
+        METRICS_FILE = "training-artifacts-py3.11/metrics.json"
+        BEST_ACCURACY_FILE = "best-accuracy"
+        DOCKER_IMAGE = "2022bcd0013ashiqfiroz/wine-quality-app-jenkins"
+        CURRENT_ACCURACY = "0"
+        MODEL_IMPROVED = "false"
+        ARTIFACTS_DIR = "training-artifacts-py3.11"
+
+        // Inference testing config
+        CONTAINER_NAME = "wine-quality-test-${BUILD_NUMBER}"
+        API_PORT = "5000"              // host port
+        CONTAINER_PORT = "8002"       // internal app port
+        // NOTE: API_HOST is NOT defined here — it is built dynamically in Stage 2
+        // using the container's internal IP (required for Docker-out-of-Docker setup)
+        HEALTH_ENDPOINT = "/"
+        PREDICT_ENDPOINT = "/predict"
+        HEALTH_TIMEOUT = "60"

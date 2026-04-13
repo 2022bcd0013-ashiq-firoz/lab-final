@@ -1,0 +1,12 @@
+.env
+.venv
+data.csv
+
+# DVC - NEVER commit config with credentials
+.dvc/config
+.dvc/config.local
+
+# Local MLflow
+.mlruns/
+mlruns/
+*.log

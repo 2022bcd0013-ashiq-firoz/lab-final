@@ -1,0 +1,6 @@
+[core]
+    remote = myremote
+['remote "myremote"']
+    url = s3://2022bcd0013-mlops/mlops-assignment
+    # AWS credentials will be injected from environment variables in CI/CD
+    # DO NOT commit actual credentials here!
