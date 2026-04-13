@@ -1,15 +1,13 @@
 pipeline {
     agent any
 
-    // environment {
-
-    // }
-
+    
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/2022bcd0013-ashiq-firoz/lab-final.git'
+               git branch: 'main',
+                    url: 'https://github.com/2022bcd0013-ashiq-firoz/lab-final.git'
             }
         }
 
