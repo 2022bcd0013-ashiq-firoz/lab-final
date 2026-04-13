@@ -1,12 +1,15 @@
 pipeline {
     agent any
 
-    
+    environment {
+        AWS_DEFAULT_REGION = 'us-east-1'  
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
-               git branch: 'main',
+                git branch: 'main',
                     url: 'https://github.com/2022bcd0013-ashiq-firoz/lab-final.git'
             }
         }
@@ -21,11 +24,20 @@ pipeline {
             }
         }
 
-        stage('DVC Pull'){
-            steps{
-                sh'''
-                dvc pull
-                '''
+        stage('DVC Pull (using AWS Secrets)') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-credentials-id'  
+                ]]) {
+                    sh '''
+                        . venv/bin/activate
+                        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                        
+                        dvc pull
+                    '''
+                }
             }
         }
 
@@ -56,7 +68,5 @@ pipeline {
                 }
             }
         }
-
-        
     }
 }
